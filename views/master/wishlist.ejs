@@ -1,0 +1,82 @@
+<!-- Hero Section Begin -->
+<%- include("../partials/heroSection",{allCategories:allCategories}) %>
+<!-- Hero Section End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="/img/breadcrumb.jpg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="breadcrumb__text">
+          <h2>My Wishlist</h2>
+          <div class="breadcrumb__option">
+            <a href="/">Home</a>
+            <span>My wishlist</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+<% if(locals.findWishlist?.myList?.length>0) {%>
+<!-- wishlist  Section Begin -->
+<section class="shoping-cart spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="shoping__cart__table">
+          <table>
+            <thead>
+              <tr>
+                <th class="shoping__product">Products</th>
+                <th>Price</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% findWishlist.myList.forEach(list=>{ %>
+              <tr id="wishlist-<%= list.productId.id %>">
+                <td class="shoping__cart__item">
+                  <img src="/files/<%= list.productId.productImagePath[0] %>" alt="" width="120" height="150">
+                  <a href="/product/<%=list.productId.id%>" class="text-dark"><%= list.productId.name%></a>
+                </td>
+                <td>
+                  <%= list.productId.price %>
+                </td>
+                <td>
+                  <div>
+                    <a class="btn" onclick="addToCart('<%=list.productId.id%>','<%=list.name%>','<%=list.productId.price%>',1,'<%=list.productId?.offerPrice%>');removeFromWishlist('<%=list.name%>','<%=list.productId.id%>')"><i class="fa fa-shopping-cart fa-lg"></i></a>
+                  </div>
+                  <div>
+                    <a onclick="removeFromWishlist('<%=list.name%>','<%=list.productId.id%>')" class="btn"><i class="fa-solid fa-trash-can fa-lg"></i></a>
+                  </div>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- wishlist Section End -->
+<%} else{%>
+<section class="container">
+  <div class="text-center py-5">
+    <img src="/img/emptycart.png" alt="">
+    <div>
+      <p class="h4">There is nothing in your bag. Let's add some items.</p>
+    </div>
+    <a href="/" class="primary-btn">Shop</a>
+  </div>
+</section>
+<%} %>
+<!-- Latest Product Section End -->
+<script>
+  function moveToCart(name, id, price) {
+    addToCart(id, name, price, 1)
+    removeFromWishlist(name, id)
+  }
+</script>

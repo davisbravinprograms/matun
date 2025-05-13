@@ -1,0 +1,248 @@
+<!-- Hero Section Begin -->
+<%- include("../partials/heroSection",{allCategories:allCategories}) %>
+<!-- Hero Section End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="/img/breadcrumb.jpg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="breadcrumb__text">
+          <h2><%= findProduct.name %></h2>
+          <div class="breadcrumb__option">
+            <a href="/">Home</a>
+            <a href="/shop/1">shop</a>
+            <a href="/shop/category/<%= findProduct.category.categoryName %>/1"><%= findProduct.category.categoryName %></a>
+            <span><%= findProduct.name %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__pic">
+          <div class="product__details__pic__item">
+            <img class="product__details__pic__item--large" src="/files/<%=findProduct.productImagePath[0]%>" alt="">
+          </div>
+          <div class="product__details__pic__slider owl-carousel">
+            <img data-imgbigurl="/files/<%=findProduct.productImagePath[1]%>" src="/files/<%=findProduct.productImagePath[1]%>" alt="">
+            <img data-imgbigurl="/files/<%=findProduct.productImagePath[2]%>" src="/files/<%=findProduct.productImagePath[2]%>" alt="">
+            <img data-imgbigurl="/files/<%=findProduct.productImagePath[0]%>" src="/files/<%=findProduct.productImagePath[0]%>" alt="">
+            <img data-imgbigurl="/files/<%=findProduct.productImagePath[1]%>" src="/files/<%=findProduct.productImagePath[1]%>" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__text">
+          <h3><%= findProduct.name %></h3>
+          <div class="product__details__rating" id="avgRating">
+            <% for(let i=1;i<=findProduct.avgRating;i++){%>
+            <i class="fa fa-star"></i>
+            <% } %>
+            <% for(let i=findProduct.avgRating;i<5;i++){%>
+            <i class="fa fa-star-o"></i>
+            <% } %>
+            <span>(<%= findProduct.totalReviews %> reviews)</span>
+          </div>
+          <% if(findProduct.discount){ %>
+          <div class="product__details__price">
+            <p><del>₹<%= findProduct.price %></del></p>
+            ₹<%= findProduct.offerPrice.toFixed(2) %>
+          </div>
+          <%  } else{ %>
+          <div class="product__details__price">
+            ₹<%= findProduct.price %>
+          </div>
+          <% } %>
+          <p><%= findProduct.description %></p>
+          <div class="product__details__quantity">
+            <div class="quantity">
+              <div class="pro-qty">
+                <span class="dec qtybtn">-</span>
+                <input type="text" value="1" name="quantity" id="itemQuantity">
+                <span class="inc qtybtn">+</span>
+              </div>
+            </div>
+          </div>
+
+          <% if(findProduct.quantity<=0){%>
+          <button class="primary-btn" disabled>ADD TO CARD</button>
+          <% }else{ %>
+          <button class="primary-btn" onclick="cart('<%=findProduct.id%>','<%=findProduct.name%>','<%=findProduct.price%>','<%=findProduct?.offerPrice %>')">ADD TO CARD</button>
+          <% } %>
+          <% if(isInMyList){ %>
+          <a class="heart-icon" onclick="wishlist('<%=findProduct.name%>','<%=findProduct.id%>')"><i id="heartBox" class="fa-solid fa-heart fa-xl" style="color: rgb(219, 47, 47);"></i></a>
+          <% }else{ %>
+          <a class="heart-icon" onclick="wishlist('<%=findProduct.name%>','<%=findProduct.id%>')"><i id="heartBox" class="fa-solid fa-heart fa-xl"></i></a>
+          <% } %>
+          <ul>
+            <% if(findProduct.quantity>5 ){%>
+            <li><b>Brand</b> <span> <%= findProduct.brand %></span></li>
+            <li><b>Category</b> <span> <%= findProduct.category.categoryName %></span></li>
+            <li><b>Availability</b> <span> In Stock</span></li>
+            <li><b>Shipping</b> <span>01 day shipping.</span></li>
+            <%}else if(findProduct.quantity>0 && findProduct.quantity <=5) {%>
+            <li><b>Availability</b> <span style="color: red;"> Only <%= findProduct.quantity%> items left, hurry up</span></li>
+            <li><b>Shipping</b> <span>01 day shipping.</span></li>
+            <%}else{%>
+            <li><b>Availability</b> <span style="color: red;">Out of Stock</span></li>
+            <%}%>
+            
+            <li><b>Share on</b>
+              <div class="share">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-pinterest"></i></a>
+              </div>
+            </li>
+            <% if(isPurchased){%>
+
+            <li>
+              <div class="row">
+                <div class="col">
+                  <div class="comment-box">
+                    <form action="/user/addRating" method="post" id="formRating">
+                      <!-- <h4>Add a comment</h4> -->
+                      <div class="rating">
+                        <input type="radio" checked name="rating" value="5" id="5"><label for="5">☆</label>
+                        <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+                        <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                        <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                        <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                      </div>
+                      <div class="comment-area">
+                        <textarea class="form-control" name="review" placeholder="what is your view?" required rows="4"></textarea>
+                      </div>
+                      <div class="comment-btns mt-2">
+                        <div class="text-right">
+                          <button class="btn btn-dark send btn-sm" type="submit">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="product__details__tab" id="detailsTab">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" aria-selected="true">Description</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" aria-selected="false">Reviews <span>(<%=findProduct.totalReviews%>)</span></a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+              <div class="product__details__tab__desc">
+                <h6>Products Description</h6>
+                <p><%= findProduct.description %></p>
+              </div>
+            </div>
+            <div class="tab-pane" id="tabs-2" role="tabpanel">
+              <div class="product__details__tab__desc">
+                <% findProduct.reviews.forEach((review)=>{ %>
+                <h6><%=review.name%> <span>
+                    <% for(let i=1;i<=review.rating;i++){%>
+                    <i class="fa fa-star"></i>
+                    <% } %>
+                    <% for(let i=review.rating;i<5;i++){%>
+                    <i class="fa fa-star-o"></i>
+                    <% } %>
+                  </span></h6>
+                <p><%=review.review%></p>
+                <% }) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Product Details Section End -->
+
+<!-- Related Product Section Begin -->
+<section class="related-product">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title related__product__title">
+          <h2>Related Product</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <%  relatedProducts.forEach((product)=>{ %>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="product__item">
+          <div class="product__item__pic set-bg" data-setbg="/files/<%=product.productImagePath[0]%>">
+            <ul class="product__item__pic__hover">
+              <li><a onclick="wishlist('<%=product.name%>','<%=product.id%>')"><i class="fa fa-heart"></i></a></li>
+              <li><a onclick="addToCart('<%=product.id%>','<%=product.name%>','<%=product.price%>',1,'<%=product?.offerPrice%>')"><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+          </div>
+          <div class="product__item__text">
+            <h6><a href="/product/<%= product.id %>"><%= product.name %></a></h6>
+            <h5>₹<%= product.price %> </h5>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- Related Product Section End -->
+
+<script>
+  document.forms["formRating"].addEventListener("submit", async (event) => {
+    event.preventDefault()
+    const data = new URLSearchParams(new FormData(event.target))
+    console.log(data.rating)
+    try {
+      const response = await axios({
+        method: "post",
+        url: '/user/addRating/<%=findProduct.id%>',
+        data: data
+      })
+      if (response.status == 201) {
+        await Swal.fire({
+          icon: 'success',
+          title: 'Congrats',
+          text: 'Your review has been submitted',
+          confirmButtonColor: '#273952',
+          width: "25em",
+          timer: 3000
+        })
+        $("#detailsTab").load(location.href + " #detailsTab>*", "");
+        $("#avgRating").load(location.href + " #avgRating>*", "");
+      }
+    } catch (err) {
+      // if(err.data.status)
+      await Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: 'Something went wrong',
+        confirmButtonColor: '#273952',
+        width: "25em",
+        timer: 3000
+      })
+      console.error(err)
+    }
+
+  })
+</script>
