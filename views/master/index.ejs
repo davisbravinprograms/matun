@@ -54,7 +54,7 @@
 <!-- Hero Section End -->
 
 <!-- Categories Section Begin -->
-<section class="categories">
+<!-- <section class="categories">
   <div class="container">
     <div class="row">
       <div class="categories__slider owl-carousel">
@@ -65,28 +65,28 @@
         </div>
         <div class="col-lg-3">
           <div class="categories__item set-bg" data-setbg="/img/categories/cat-2.jpg">
-            <h5><a href="/shop/category/women/1">Mangoes</a></h5>
+            <h5><a href="/shop/category/women/mango">Mangoes</a></h5>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="categories__item set-bg" data-setbg="img/categories/cat-3.jpg">
-            <h5><a href="/shop/category/kids/1">Bananas</a></h5>
+            <h5><a href="/shop/category/kids/banana">Bananas</a></h5>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="categories__item set-bg" data-setbg="img/categories/cat-4.jpg">
-            <h5><a href="/shop/category/footwear/1">Oranges</a></h5>
+            <h5><a href="/shop/category/footwear/berries">Oranges</a></h5>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="categories__item set-bg" data-setbg="img/categories/cat-5.jpg">
-            <h5><a href="/shop/category/beauty/1">Watermelon</a></h5>
+            <h5><a href="/shop/category/beauty/apple">Watermelon</a></h5>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <!-- Categories Section End -->
 
 <!-- Featured Section Begin -->
@@ -112,21 +112,31 @@
       <% featuredProducts.forEach((product)=> { %>
       <div class="col-lg-3 col-md-4 col-sm-6 mix <%= product.category.categoryName %>">
         <div class="featured__item">
-          <div class="featured__item__pic set-bg" data-setbg="/files/<%=product.productImagePath[0]%>">
+         <div class="featured__item__pic set-bg" data-setbg="<%= product.productImagePath[0] %>">
+
             <ul class="featured__item__pic__hover">
-              <li><a onclick="wishlist('<%=product.name%>','<%=product.id%>')"><i class="fa fa-heart"></i></a></li>
+              <a href="https://wa.me/+254714518406" target="_blank" class="hero__search__phone d-flex align-items-center" style="text-decoration: none; color: inherit;">
+  <div class="hero__search__phone__icon me-2">
+    <i class="fa fa-whatsapp"></i>
+  </div>
+  <div class="hero__search__phone__text">
+   
+    <!-- <span style="font-size: 12px;"> </span> -->
+  </div>
+</a>
+              <!-- <li><a onclick="wishlist('<%=product.name%>','<%=product.id%>')"><i class="fa fa-heart"></i></a></li> -->
               <li><a onclick="addToCart('<%=product.id%>','<%=product.name%>','<%=product.price%>',1,'<%=product?.offerPrice%>')"><i class="fa fa-shopping-cart"></i></a></li>
             </ul>
           </div>
           <% if(product.discount){ %>
           <div class="product__discount__item__text">
             <h5><a href="/product/<%= product.id %>"><%= product.name %> </a></h5>
-            <div class="product__item__price"> ₹<%= product.offerPrice.toFixed(2)%><span>₹<%= product.price %> </span></div>
+            <div class="product__item__price"> Ksh.<%= product.offerPrice.toFixed(2)%><span>₹<%= product.price %> </span></div>
           </div>
           <%  } else{ %>
           <div class="product__item__text">
             <h6><a href="/product/<%= product.id %>"><%= product.name %></a></h6>
-            <h5>₹<%= product.price %></h5>
+            <h5>Ksh.<%= product.price %></h5>
           </div>
           <%  } %>
         </div>
@@ -145,7 +155,7 @@
       <% secondaryBanner.forEach(banner=>{ %>
       <div class="col-lg-6 col-md-6 col-sm-6">
         <div class="banner__pic">
-          <img src="/files/<%= banner.bannerImagePath %> " alt="">
+          <img src="<%= banner.bannerImagePath %> " alt="">
         </div>
       </div>
       <% }) %>
@@ -167,17 +177,17 @@
               <% latestProducts.slice(0,3).forEach((product)=> { %>
               <a href="/product/<%= product.id %>" class="latest-product__item">
                 <div class="latest-product__item__pic">
-                  <img src="/files/<%=product.productImagePath[0]%>" alt="">
+                  <img src="<%=product.productImagePath[0]%>" alt="">
                 </div>
                 <% if(product.discount){%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>₹<%= product.offerPrice.toFixed(2) %></span>
+                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
                 </div>
                 <% }else{%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <span>₹<%= product.price %></span>
+                  <span>Ksh.<%= product.price %></span>
                 </div>
                 <% } %>
               </a>
@@ -187,17 +197,17 @@
               <% latestProducts.slice(3,6).forEach((product)=> { %>
               <a href="/product/<%= product.id %>" class="latest-product__item">
                 <div class="latest-product__item__pic">
-                  <img src="/files/<%=product.productImagePath[0]%>" alt="">
+                  <img src="<%=product.productImagePath[0]%>" alt="">
                 </div>
                 <% if(product.discount){%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>₹<%= product.offerPrice.toFixed(2) %></span>
+                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
                 </div>
                 <% }else{%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <span>₹<%= product.price %></span>
+                  <span>Ksh.<%= product.price %></span>
                 </div>
                 <% } %>
               </a>
@@ -216,17 +226,17 @@
               <% topRatedProducts.slice(0,3).forEach((product)=>{ %>
               <a href="/product/<%= product.id %>" class="latest-product__item">
                 <div class="latest-product__item__pic">
-                  <img src="/files/<%= product.productImagePath[0]%>" alt="">
+                  <img src="<%= product.productImagePath[0]%>" alt="">
                 </div>
                 <% if(product.discount){%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>₹<%= product.offerPrice.toFixed(2) %></span>
+                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
                 </div>
                 <% }else{%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <span>₹<%= product.price %></span>
+                  <span>Ksh.<%= product.price %></span>
                 </div>
                 <% } %>
               </a>
@@ -237,17 +247,17 @@
               <% topRatedProducts.slice(3,6).forEach((product)=>{ %>
               <a href="/product/<%= product.id %>" class="latest-product__item">
                 <div class="latest-product__item__pic">
-                  <img src="/files/<%= product.productImagePath[0]%>" alt="">
+                  <img src="<%= product.productImagePath[0]%>" alt="">
                 </div>
                 <% if(product.discount){%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>₹<%= product.offerPrice.toFixed(2) %></span>
+                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
                 </div>
-                <% }else{%>
+                <% }else{%> 
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <span>₹<%= product.price %></span>
+                  <span>Ksh.<%= product.price %></span>
                 </div>
                 <% } %>
               </a>
@@ -266,17 +276,17 @@
               <% topReviewedProducts.slice(0,3).forEach((product)=>{ %>
               <a href="/product/<%= product.id %>" class="latest-product__item">
                 <div class="latest-product__item__pic">
-                  <img src="/files/<%= product.productImagePath[0]%>" alt="">
+                  <img src="<%= product.productImagePath[0]%>" alt="">
                 </div>
                 <% if(product.discount){%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>₹<%= product.offerPrice.toFixed(2) %></span>
+                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
                 </div>
                 <% }else{%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <span>₹<%= product.price %></span>
+                  <span>Ksh.<%= product.price %></span>
                 </div>
                 <% } %>
               </a>
@@ -288,17 +298,17 @@
               <% topReviewedProducts.slice(3,6).forEach((product)=>{ %>
               <a href="/product/<%= product.id %>" class="latest-product__item">
                 <div class="latest-product__item__pic">
-                  <img src="/files/<%= product.productImagePath[0]%>" alt="">
+                  <img src="<%= product.productImagePath[0]%>" alt="">
                 </div>
                 <% if(product.discount){%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>₹<%= product.offerPrice.toFixed(2) %></span>
+                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
                 </div>
                 <% }else{%>
                 <div class="latest-product__item__text">
                   <h6><%= product.name %></h6>
-                  <span>₹<%= product.price %></span>
+                  <span>Ksh.<%= product.price %></span>
                 </div>
                 <% } %>
               </a>

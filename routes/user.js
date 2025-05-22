@@ -39,4 +39,7 @@ router.delete("/removeCoupon",couponControl.removeCoupon)
 router.delete("/cart/:id", cartControl.deleteItem)
 router.delete("/deleteAddress/:index",userControl.removeAddress)
 
+
+// router.get('/privacy', res.render('privacy'))
+
 module.exports = router

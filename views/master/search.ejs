@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <div class="breadcrumb__text">
-          <h2>myStyle Shop</h2>
+          <h2>mtundaafya</h2>
           <div class="breadcrumb__option">
             <a href="/">Home</a>
             <a href="/shop/1">Shop</a>
@@ -128,17 +128,17 @@
                   <% newProducts.forEach((product)=> { %>
                   <a href="/product/<%= product.id %>" class="latest-product__item">
                     <div class="latest-product__item__pic">
-                      <img src="/files/<%=product.productImagePath[0]%>" alt="">
+                      <img src="<%=product.productImagePath[0]%>" alt="">
                     </div>
                     <% if(product.discount){%>
                     <div class="latest-product__item__text">
                       <h6><%= product.name %></h6>
-                      <h6><del><%=product.price  %></del></h6> <span>₹<%= product.offerPrice.toFixed(2) %></span>
+                      <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
                     </div>
                     <% }else{%>
                     <div class="latest-product__item__text">
                       <h6><%= product.name %></h6>
-                      <span>₹<%= product.price %></span>
+                      <span>Ksh.<%= product.price %></span>
                     </div>
                     <% } %>
                   </a>
@@ -188,12 +188,12 @@
               <% if(product.discount){ %>
               <div class="product__discount__item__text">
                 <h5><a href="/product/<%= product.id %>"><%= product.name %> </a></h5>
-                <div class="product__item__price"> ₹<%= product.offerPrice.toFixed(2) %><span>₹<%= product.price %> </span></div>
+                <div class="product__item__price"> Ksh.<%= product.offerPrice.toFixed(2) %><span>₹<%= product.price %> </span></div>
               </div>
               <%  } else{ %>
               <div class="product__item__text">
                 <h6><a href="/product/<%= product.id %>"><%= product.name %></a></h6>
-                <h5>₹<%= product.price %></h5>
+                <h5>Ksh.<%= product.price %></h5>
               </div>
               <%  } %>
             </div>
@@ -239,14 +239,14 @@
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const keyword = urlParams.get("name");
-    const minPrice = urlParams.get("minPrice")?.split("₹").join("") || 100
-    const maxPrice = urlParams.get("maxPrice")?.split("₹").join("") || 5000
+    const minPrice = urlParams.get("minPrice")?.split("Ksh.").join("") || 100
+    const maxPrice = urlParams.get("maxPrice")?.split("Ksh.").join("") || 5000
     window.location =`/search/1?name=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&sort=${sortOrder}`
 
   }
   function filterItems(filter){
-    const minPrice = document.getElementById("minamount").value.split("₹").join("")
-    const maxPrice = document.getElementById("maxamount").value.split("₹").join("")
+    const minPrice = document.getElementById("minamount").value.split("Ksh.").join("")
+    const maxPrice = document.getElementById("maxamount").value.split("Ksh.").join("")
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const keyword = urlParams.get("name");
@@ -270,10 +270,10 @@ min: minPrice,
 max: maxPrice,
 values: ['<%=minPrice%>', '<%=maxPrice%>'],
 slide: function (event, ui) {
-minamount.val('₹' + ui.values[0]);
-maxamount.val('₹' + ui.values[1]);
+minamount.val('Ksh.' + ui.values[0]);
+maxamount.val('Ksh.' + ui.values[1]);
 }
 });
-minamount.val('₹' + rangeSlider.slider("values", 0));
-maxamount.val('₹' + rangeSlider.slider("values", 1));
+minamount.val('Ksh.' + rangeSlider.slider("values", 0));
+maxamount.val('Ksh.' + rangeSlider.slider("values", 1));
 </script>

@@ -1,4 +1,4 @@
-<div class="container-fluid px-4">
+<!-- <div class="container-fluid px-4">
   <h1 class="mt-4">Product Management</h1>
   <%- include("../partials/errorMessage") %>
   <div class="card mb-4">
@@ -63,7 +63,7 @@
                   <button class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#edit-<%= product.id %>" type="button"><i class="fa-solid fa-pen-to-square"></i></button>
                   <a class="btn btn-sm btn-outline-danger" href="#deleteModal<%= product.id %>" data-bs-toggle="modal"><i class="fa-solid fa-trash-can"></i></a>
                 </div>
-                <!-- delete modal start -->
+          
                 <div class="modal modal-alert" tabindex="-1" role="dialog" id="deleteModal<%= product.id %>">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content rounded-3 shadow">
@@ -79,12 +79,12 @@
                   </div>
                 </div>
 
-                <!-- delete modal end -->
+          
 
               </form>
             </td>
           </tr>
-          <!-- modal body  -->
+      
           <div class="modal fade" id="edit-<%= product.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
               <div class="modal-content">
@@ -149,6 +149,200 @@
               </div>
             </div>
           </div>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> -->
+
+<!-- <script>
+  function exportCsv() {
+    myTable.export({
+      type: "csv",
+      skipColumn: [0, 8],
+      filename: "product_details",
+    });
+  }
+</script> -->
+
+
+
+
+
+<!-- !!@@@@NEW CODE/ -->
+
+
+<div class="container-fluid px-4">
+  <h1 class="mt-4">Product Management</h1>
+  <%- include("../partials/errorMessage") %>
+  <div class="card mb-4">
+    <div class="card-header">
+      <i class="fas fa-table me-1"></i>
+      Products
+      <%- include("_modal_product") %>
+      <div class=" float-end">
+        <button class="btn btn-dark btn-sm" onclick="exportCsv()">Export <i class="fa-solid fa-download"></i></button>
+        <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#addProduct">New Product <i class="fa-solid fa-circle-plus"></i></button>
+      </div>
+    </div>
+    <div class="card-body">
+      <table id="datatablesSimple">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Stock</th>
+            <th>Price</th>
+            <th>Discount %</th>
+            <th>Offer Price</th>
+            <th>Is Featured</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Stock</th>
+            <th>Price</th>
+            <th>Discount %</th>
+            <th>Offer Price</th>
+            <th>Is Featured</th>
+            <th>Action</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% allProducts.forEach(product => { %>
+          <tr>
+            <td>
+              <% if (product.productImagePath && product.productImagePath.length > 0) { %>
+                <img 
+                  src="<%= product.productImagePath[0] %>" 
+                  alt="<%= product.name %>" 
+                  width="60" 
+                  class="img-fluid img-thumbnail"
+                  onerror="this.onerror=null; this.src='/images/default-product.png'" 
+                >
+              <% } else { %>
+                <img 
+                  src="/images/default-product.png" 
+                  alt="No image" 
+                  width="60" 
+                  class="img-fluid img-thumbnail"
+                >
+              <% } %>
+            </td>
+            <td><%= product.name %></td>
+            <td><%= product.brand %></td>
+            <td><%= product.category.categoryName %></td>
+            <td><%= product.quantity %></td>
+            <td><%= product.price %></td>
+            <td><%= product.discount %></td>
+            <td><%= product.offerPrice %></td>
+            <% if (product.isFeatured) { %>
+              <td><span class="badge bg-success">Featured</span></td>
+            <% } else { %>
+              <td></td>
+            <% } %> 
+            <td>
+              <form action="/admin/deleteProduct/<%= product.id %>?_method=DELETE" method="post">
+                <div>
+                  <button class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#edit-<%= product.id %>" type="button"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <a class="btn btn-sm btn-outline-danger" href="#deleteModal<%= product.id %>" data-bs-toggle="modal"><i class="fa-solid fa-trash-can"></i></a>
+                </div>
+                <!-- delete modal start -->
+                <div class="modal modal-alert" tabindex="-1" role="dialog" id="deleteModal<%= product.id %>">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content rounded-3 shadow">
+                      <div class="modal-body p-4 text-center">
+                        <h5 class="mb-2">Warning! Are you sure</h5>
+                        <p class="mb-0">This change can't be undone.</p>
+                      </div>
+                      <div class="modal-footer flex-nowrap p-0">
+                        <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end"><strong>Yes</strong></button>
+                        <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">No</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- delete modal end -->
+              </form>
+            </td>
+          </tr>
+
+          <!-- modal body  -->
+          <div class="modal fade" id="edit-<%= product.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="/admin/editProduct/<%= product.id %>?_method=PUT" method="post" enctype="multipart/form-data">
+                    <div>
+                      <label class="form-label">Name</label>
+                      <input type="text" value="<%= product.name %>" name="name" required class="form-control">
+                    </div>
+                    <div>
+                      <label class="form-label">Brand</label>
+                      <input type="text" value="<%= product.brand %>" name="brand" required class="form-control">
+                    </div>
+                    <div>
+                      <label class="form-label">Category</label>
+                      <select name="category" class="form-select">
+                        <% allCategories.forEach(category => { %>
+                          <% if (product.category.id == category.id) { %>
+                            <option selected value="<%= category.id %>" label="<%= category.categoryName %>"></option>
+                          <% } else { %>
+                            <option value="<%= category.id %>" label="<%= category.categoryName %>"></option>
+                          <% } %>
+                        <% }) %>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="form-label">Stock</label>
+                      <input type="number" name="quantity" min="1" value="<%= product.quantity %>" required class="form-control">
+                    </div>
+                    <div>
+                      <label class="form-label">Price</label>
+                      <input type="number" name="price" min="1" value="<%= product.price %>" required class="form-control">
+                    </div>
+                    <div>
+                      <label class="form-label">Discount</label>
+                      <input type="number" name="discount" value="<%= product.discount %>" class="form-control">
+                    </div>
+                    <div class="form-check form-switch mt-2">
+                      <% if (product.isFeatured) { %>
+                        <input class="form-check-input" checked type="checkbox" name="isFeatured" id="flexSwitchCheckDefault">
+                      <% } else { %>
+                        <input class="form-check-input" type="checkbox" name="isFeatured" id="flexSwitchCheckDefault">
+                      <% } %>
+                      <label class="form-check-label" for="flexSwitchCheckDefault">Is Featured?</label>
+                    </div>
+                    <div>
+                      <label class="form-label">Description</label>
+                      <textarea name="description" rows="5" class="form-control" placeholder="Add description" required><%= product.description %></textarea>
+                    </div>
+                    <div>
+                      <label class="form-label">Upload Product Image</label>
+                      <input type="file" multiple name="productImages" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-dark">Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <% }) %>
         </tbody>
       </table>

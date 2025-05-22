@@ -121,9 +121,11 @@
 
                   <% findCart.products.forEach(item=>{%>
                   <li class="mb-2">
-                    <img type="button" src="/files/<%= item.productId.productImagePath[0] %>" alt="" width="50" height="60">
+                    <!-- <img type="button" src="/files/<%= item.productId.productImagePath[0] %>" alt="" width="50" height="60"> -->
+                     <img type="button" src="<%= item.productId.productImagePath[0] %>" alt="<%= item.name %>" width="50" height="60">
+
                     <%= item.name %> x<%= item.quantity %>
-                    <span>₹<%= item.offerPrice ? (item.offerPrice*item.quantity).toFixed(2) : (item.price*item.quantity).toFixed(2)  %> </span>
+                    <span>Ksh.<%= item.offerPrice ? (item.offerPrice*item.quantity).toFixed(2) : (item.price*item.quantity).toFixed(2)  %> </span>
                   </li>
                   <%}) %>
 

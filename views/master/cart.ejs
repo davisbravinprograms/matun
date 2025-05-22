@@ -40,7 +40,7 @@
               <% findCart.products.forEach(item=>{ %>
               <tr id="cartItem-<%= item.productId.id %>">
                 <td class="shoping__cart__item">
-                  <img src="/files/<%= item.productId.productImagePath[0]%>" alt="" width="120" height="150" />
+                  <img src="<%= item.productId.productImagePath[0]%>" alt="" width="120" height="150" />
                   <a href="/product/<%=item.productId.id%>" class="text-dark"><%= item.productId.name%></a>
                 </td>
                 <%if(item.offerPrice){%>
@@ -104,7 +104,7 @@
             </li>
             <% let discount = findCart.subTotal - findCart.total %>
             <li>
-              Cart Discount <span class="text-muted">₹<%=discount.toFixed(2)%></span>
+              Cart Discount <span class="text-muted">Ksh.<%=discount.toFixed(2)%></span>
             </li>
             <% if(couponCode){%>
             <li>
