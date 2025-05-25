@@ -78,6 +78,13 @@ app.use(function (req, res, next) {
   }
 });
 
+
+
+
+app.get("/privacy", (req, res) => {
+  res.render("/privatePolicy");
+});
+
 const PORT = process.env.PORT || '0.0.0.0';
 // const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("server is up and running on port" + PORT));

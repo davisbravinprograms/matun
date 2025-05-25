@@ -1,49 +1,120 @@
 <!-- Hero Section Begin -->
-<section class="hero">
+<section class="hero py-4 bg-light">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3">
-        <div class="hero__categories">
-          <div class="hero__categories__all">
-            <i class="fa fa-bars"></i>
-            <span>matundaAFYAKENYA</span>
+      <!-- Sidebar Categories -->
+      <!-- <div class="col-lg-3 mb-4">
+        <div class="bg-white p-3 shadow-sm rounded d-none d-lg-block">
+          <div class="d-flex align-items-center mb-3">
+            <i class="fa fa-bars me-2 text-primary"></i>
+            <strong class="text-dark">matundaAFYAKENYA</strong>
           </div>
-          <ul class="hero_all_category">
+          <ul class="list-unstyled">
             <% allCategories.forEach((category)=>{ %>
-            <li><a href="/shop/category/<%= category.categoryName %>/1"><%= category.categoryName %></a></li>
+              <li><a href="/shop/category/<%= category.categoryName %>/1" class="text-dark d-block py-1"><%= category.categoryName %></a></li>
             <% }) %>
           </ul>
-        </div>
+        </div> -->
+        <div class="col-lg-3 mb-4">
+  <div class="bg-white p-3 shadow-sm rounded d-none d-lg-block">
+    <div 
+      class="d-flex align-items-center justify-content-between mb-3" 
+      style="cursor: pointer;" 
+      onclick="toggleDesktopCategory()"
+    >
+      <div class="d-flex align-items-center">
+        <i class="fa fa-bars me-2 text-primary"></i>
+        <strong class="text-dark">matundaAFYAKENYA</strong>
       </div>
-      <div class="col-lg-9">
-        <div class="hero__search">
-          <div class="hero__search__form autocomplete">
-            <form action="/search/1" method="get">
-              <div class="hero__search__categories">
-                All Categories
-                <span class="arrow_carrot-down"></span>
-              </div>
-              <input type="text" placeholder="What do yo u need?" required name="name" id="searchKey" onkeyup="sendData(this)">
-              <button type="submit" class="site-btn">SEARCH</button>
-            </form>
-          </div>
-          <div class="hero__search__phone">
-            <div class="hero__search__phone__icon">
-              <i class="fa fa-phone"></i>
+      <i class="fa fa-chevron-down" id="desktopToggleIcon" style="transition: transform 0.3s;"></i>
+    </div>
+    
+    <ul class="list-unstyled" id="desktopCategoryList">
+      <% allCategories.forEach((category)=>{ %>
+        <li>
+          <a 
+            href="/shop/category/<%= category.categoryName %>/1" 
+            class="text-dark d-block py-1" 
+            style="text-decoration: none;"
+          >
+            <%= category.categoryName %>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</div>
+
+
+        <!-- Collapsible for mobile -->
+        <!-- <div class="d-lg-none mb-4">
+         
+          <button class="btn btn-outline-secondary w-100 mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#categoryCollapse" aria-expanded="false" aria-controls="categoryCollapse">
+           <i class="fa fa-bars me-2"></i> Categories
+          </button>
+          <div class="collapse" id="categoryCollapse">
+            <div class="bg-white p-3 shadow-sm rounded">
+              <ul class="list-unstyled mb-0">
+                <% allCategories.forEach((category)=>{ %>
+                  <li><a href="/shop/category/<%= category.categoryName %>/1" class="text-dark d-block py-1"><%= category.categoryName %></a></li>
+                <% }) %>
+              </ul>
             </div>
-            <div class="hero__search__phone__text">
-              <h5>+254714518406</h5>
-              <span>support 24/7 time</span>
+          </div>
+        </div> -->
+        <!-- Collapsible for mobile -->
+<div class="d-lg-none mb-4">
+  <button 
+    class="btn btn-outline-secondary w-100 mb-2 d-flex align-items-center justify-content-between"
+    type="button"
+    onclick="toggleCategoryCollapse()"
+  >
+    <span><i class="fa fa-bars me-2"></i> Categories</span>
+    <i class="fa fa-chevron-down" id="categoryToggleIcon" style="transition: transform 0.3s;"></i>
+  </button>
+
+  <div id="categoryCollapse" class="bg-white p-3 shadow-sm rounded d-none">
+    <ul class="list-unstyled mb-0">
+      <% allCategories.forEach((category)=>{ %>
+        <li>
+          <a 
+            href="/shop/category/<%= category.categoryName %>/1" 
+            class="text-dark d-block py-1"
+            style="text-decoration: none;"
+          >
+            <%= category.categoryName %>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <!-- Search & Banner -->
+      <div class="col-lg-9">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
+          <form class="d-flex w-100 me-md-3 mb-2 mb-md-0" action="/search/1" method="get">
+            <input type="text" placeholder="What do you need?" name="name" id="searchKey" onkeyup="sendData(this)" class="form-control me-2" required>
+            <button type="submit" class="btn btn-success">SEARCH</button>
+          </form>
+          <div class="d-flex align-items-center">
+            <i class="fa fa-phone text-success fs-4 me-2"></i>
+            <div>
+              <strong>+254714518406</strong><br>
+              <small>support 24/7</small>
             </div>
           </div>
         </div>
-        <% if(primaryBanner){%>
-        <div class="hero__item set-bg primary-banner" data-setbg="/files/<%= primaryBanner.bannerImagePath %>">
-          <div class="hero__text">
-            <span>myStyle</span>
-            <h2><%= primaryBanner.title %> <br><%= primaryBanner.caption %></h2>
-            <p>Use Coupon ONAM100</p>
-            <a href="<%= primaryBanner.url %>" class="primary-btn">SHOP NOW</a>
+
+        <% if(primaryBanner){ %>
+        <div class="hero__item rounded overflow-hidden shadow-sm position-relative" style="background: url('/files/<%= primaryBanner.bannerImagePath %>') center center / cover; height: 300px;">
+          <div class="hero__text position-absolute text-white p-4" style="top: 50%; left: 10%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); border-radius: 8px;">
+            <span class="d-block fw-bold">myStyle</span>
+            <h2><%= primaryBanner.title %><br><%= primaryBanner.caption %></h2>
+            <p>Use Coupon <strong>ONAM100</strong></p>
+            <a href="<%= primaryBanner.url %>" class="btn btn-warning text-dark fw-bold">SHOP NOW</a>
           </div>
         </div>
         <% } %>
@@ -53,272 +124,104 @@
 </section>
 <!-- Hero Section End -->
 
-<!-- Categories Section Begin -->
-<!-- <section class="categories">
-  <div class="container">
-    <div class="row">
-      <div class="categories__slider owl-carousel">
-        <div class="col-lg-3">
-          <div class="categories__item set-bg" data-setbg="/img/categories/cat-1.jpg">
-            <h5><a href="/shop/category/men/1">Apple</a></h5>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="categories__item set-bg" data-setbg="/img/categories/cat-2.jpg">
-            <h5><a href="/shop/category/women/mango">Mangoes</a></h5>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="categories__item set-bg" data-setbg="img/categories/cat-3.jpg">
-            <h5><a href="/shop/category/kids/banana">Bananas</a></h5>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="categories__item set-bg" data-setbg="img/categories/cat-4.jpg">
-            <h5><a href="/shop/category/footwear/berries">Oranges</a></h5>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="categories__item set-bg" data-setbg="img/categories/cat-5.jpg">
-            <h5><a href="/shop/category/beauty/apple">Watermelon</a></h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-<!-- Categories Section End -->
-
 <!-- Featured Section Begin -->
-<section class="featured spad">
+<section class="featured py-5">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="section-title">
-          <h2>Featured Product</h2>
-        </div>
-        <div class="featured__controls">
-          <ul>
-            <li class="active" data-filter="*">All</li>
-            <li data-filter=.Men>Apples</li>
-            <li data-filter=.Women>Mangoes</li>
-            <li data-filter=.Kids>Oranges</li>
-          </ul>
-        </div>
-      </div>
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+      <h2 class="mb-3 mb-md-0">Featured Products</h2>
+      <ul class="nav">
+        <li class="nav-item"><a class="nav-link active" href="#">All</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Apples</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Mangoes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Oranges</a></li>
+      </ul>
     </div>
-    <div class="row featured__filter">
 
-      <% featuredProducts.forEach((product)=> { %>
-      <div class="col-lg-3 col-md-4 col-sm-6 mix <%= product.category.categoryName %>">
-        <div class="featured__item">
-         <div class="featured__item__pic set-bg" data-setbg="<%= product.productImagePath[0] %>">
-
-            <ul class="featured__item__pic__hover">
-              <a href="https://wa.me/+254714518406" target="_blank" class="hero__search__phone d-flex align-items-center" style="text-decoration: none; color: inherit;">
-  <div class="hero__search__phone__icon me-2">
-    <i class="fa fa-whatsapp"></i>
-  </div>
-  <div class="hero__search__phone__text">
-   
-    <!-- <span style="font-size: 12px;"> </span> -->
-  </div>
-</a>
-              <!-- <li><a onclick="wishlist('<%=product.name%>','<%=product.id%>')"><i class="fa fa-heart"></i></a></li> -->
-              <li><a onclick="addToCart('<%=product.id%>','<%=product.name%>','<%=product.price%>',1,'<%=product?.offerPrice%>')"><i class="fa fa-shopping-cart"></i></a></li>
-            </ul>
+    <div class="row g-4">
+      <% featuredProducts.slice(0, 5).forEach((product) => { %>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          <div class="card h-100 border-0 shadow-sm">
+            <img src="<%= product.productImagePath[0] %>" class="card-img-top p-2" style="height: 160px; object-fit: cover; border-radius: 25px;" alt="<%= product.name %>">
+            <div class="card-body p-2">
+              <h6 class="card-title mb-1"><a href="/product/<%= product.id %>" class="text-dark text-decoration-none"><%= product.name %></a></h6>
+              <% if(product.discount){ %>
+                <p class="mb-1 text-success fw-bold">Ksh.<%= product.offerPrice.toFixed(2)%></p>
+                <p class="text-muted"><del>Ksh.<%= product.price %></del></p>
+              <% } else { %>
+                <p class="mb-0 text-success fw-bold">Ksh.<%= product.price %></p>
+              <% } %>
+              <div class="d-flex justify-content-between mt-2">
+                <button class="btn btn-outline-success btn-sm w-100 me-1" onclick="addToCart('<%= product.id %>','<%= product.name %>','<%= product.price %>',1,'<%= product?.offerPrice %>')"><i class="fa fa-shopping-cart"></i></button>
+                <a href="https://wa.me/+254714518406" target="_blank" class="btn btn-outline-success btn-sm w-100 ms-1"><i class="fa fa-whatsapp"></i></a>
+              </div>
+            </div>
           </div>
-          <% if(product.discount){ %>
-          <div class="product__discount__item__text">
-            <h5><a href="/product/<%= product.id %>"><%= product.name %> </a></h5>
-            <div class="product__item__price"> Ksh.<%= product.offerPrice.toFixed(2)%><span>₹<%= product.price %> </span></div>
-          </div>
-          <%  } else{ %>
-          <div class="product__item__text">
-            <h6><a href="/product/<%= product.id %>"><%= product.name %></a></h6>
-            <h5>Ksh.<%= product.price %></h5>
-          </div>
-          <%  } %>
         </div>
-      </div>
       <% }) %>
     </div>
+
+    <!-- Pagination -->
+    <% if(featuredProducts.length > 5){ %>
+    <nav class="mt-4 d-flex justify-content-center">
+      <ul class="pagination">
+        <% for (let i = 0; i < Math.ceil(featuredProducts.length / 5); i++) { %>
+          <li class="page-item <%= i === 0 ? 'active' : '' %>">
+            <a class="page-link" href="?page=<%= i + 1 %>"><%= i + 1 %></a>
+          </li>
+        <% } %>
+      </ul>
+    </nav>
+    <% } %>
   </div>
 </section>
 <!-- Featured Section End -->
 
-<% if(secondaryBanner){%>
-<!-- Banner Begin -->
-<div class="banner">
-  <div class="container">
-    <div class="row">
-      <% secondaryBanner.forEach(banner=>{ %>
-      <div class="col-lg-6 col-md-6 col-sm-6">
-        <div class="banner__pic">
-          <img src="<%= banner.bannerImagePath %> " alt="">
-        </div>
-      </div>
-      <% }) %>
-    </div>
-  </div>
-</div>
-<!-- Banner End -->
-<%} %>
+<!-- Optional: Include Bootstrap 5 if not already included -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function toggleCategoryCollapse() {
+    const collapseDiv = document.getElementById('categoryCollapse');
+    const icon = document.getElementById('categoryToggleIcon');
+    
+    if (collapseDiv.classList.contains('d-none')) {
+      collapseDiv.classList.remove('d-none');
+      icon.style.transform = "rotate(180deg)";
+    } else {
+      collapseDiv.classList.add('d-none');
+      icon.style.transform = "rotate(0deg)";
+    }
+  }
 
-<!-- Latest Product Section Begin -->
-<section class="latest-product spad" id="latestProducts">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 col-md-6">
-        <div class="latest-product__text">
-          <h4>Latest Products</h4>
-          <div class="latest-product__slider owl-carousel">
-            <div class="latest-prdouct__slider__item">
-              <% latestProducts.slice(0,3).forEach((product)=> { %>
-              <a href="/product/<%= product.id %>" class="latest-product__item">
-                <div class="latest-product__item__pic">
-                  <img src="<%=product.productImagePath[0]%>" alt="">
-                </div>
-                <% if(product.discount){%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
-                </div>
-                <% }else{%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <span>Ksh.<%= product.price %></span>
-                </div>
-                <% } %>
-              </a>
-              <% }) %>
-            </div>
-            <div class="latest-prdouct__slider__item">
-              <% latestProducts.slice(3,6).forEach((product)=> { %>
-              <a href="/product/<%= product.id %>" class="latest-product__item">
-                <div class="latest-product__item__pic">
-                  <img src="<%=product.productImagePath[0]%>" alt="">
-                </div>
-                <% if(product.discount){%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
-                </div>
-                <% }else{%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <span>Ksh.<%= product.price %></span>
-                </div>
-                <% } %>
-              </a>
-              <% }) %>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-lg-4 col-md-6">
-        <div class="latest-product__text">
-          <h4>Top Rated Products</h4>
-          <div class="latest-product__slider owl-carousel">
 
-            <div class="latest-prdouct__slider__item">
-              <% topRatedProducts.slice(0,3).forEach((product)=>{ %>
-              <a href="/product/<%= product.id %>" class="latest-product__item">
-                <div class="latest-product__item__pic">
-                  <img src="<%= product.productImagePath[0]%>" alt="">
-                </div>
-                <% if(product.discount){%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
-                </div>
-                <% }else{%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <span>Ksh.<%= product.price %></span>
-                </div>
-                <% } %>
-              </a>
-              <% }) %>
-            </div>
 
-            <div class="latest-prdouct__slider__item">
-              <% topRatedProducts.slice(3,6).forEach((product)=>{ %>
-              <a href="/product/<%= product.id %>" class="latest-product__item">
-                <div class="latest-product__item__pic">
-                  <img src="<%= product.productImagePath[0]%>" alt="">
-                </div>
-                <% if(product.discount){%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
-                </div>
-                <% }else{%> 
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <span>Ksh.<%= product.price %></span>
-                </div>
-                <% } %>
-              </a>
-              <% }) %>
-            </div>
 
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="latest-product__text">
-          <h4>Review Products</h4>
-          <div class="latest-product__slider owl-carousel">
-            <div class="latest-prdouct__slider__item">
 
-              <% topReviewedProducts.slice(0,3).forEach((product)=>{ %>
-              <a href="/product/<%= product.id %>" class="latest-product__item">
-                <div class="latest-product__item__pic">
-                  <img src="<%= product.productImagePath[0]%>" alt="">
-                </div>
-                <% if(product.discount){%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
-                </div>
-                <% }else{%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <span>Ksh.<%= product.price %></span>
-                </div>
-                <% } %>
-              </a>
-              <% }) %>
-            </div>
 
-            <div class="latest-prdouct__slider__item">
+  function toggleDesktopCategory() {
+    const list = document.getElementById('desktopCategoryList');
+    const icon = document.getElementById('desktopToggleIcon');
 
-              <% topReviewedProducts.slice(3,6).forEach((product)=>{ %>
-              <a href="/product/<%= product.id %>" class="latest-product__item">
-                <div class="latest-product__item__pic">
-                  <img src="<%= product.productImagePath[0]%>" alt="">
-                </div>
-                <% if(product.discount){%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <h6><del><%=product.price  %></del></h6> <span>Ksh.<%= product.offerPrice.toFixed(2) %></span>
-                </div>
-                <% }else{%>
-                <div class="latest-product__item__text">
-                  <h6><%= product.name %></h6>
-                  <span>Ksh.<%= product.price %></span>
-                </div>
-                <% } %>
-              </a>
-              <% }) %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    if (list.style.display === "none") {
+      list.style.display = "block";
+      icon.style.transform = "rotate(0deg)";
+    } else {
+      list.style.display = "none";
+      icon.style.transform = "rotate(180deg)";
+    }
+  }
 
-<!-- Latest Product Section End -->
+  // Ensure it's visible on first load
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('desktopCategoryList').style.display = 'block';
+  });
+
+
+
+
+
+
+
+
+</script>

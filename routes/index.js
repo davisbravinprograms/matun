@@ -139,6 +139,12 @@ router.get(
 router.get("/error", (req, res) => {
   res.render("errorPage/error", { layout: false });
 });
+router.get("/privacy", (req, res) => {
+  res.render("privacyPolicy");
+});
+router.get("/aboutus", (req, res) => {
+  res.render("aboutUs");
+});
 
 router.post("/autoFill", shopControl.autoFill);
 router.post("/validateOtp", otpVerification);

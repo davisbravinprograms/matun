@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | MatundaAfyaKenya</title>
+  <style>
+    :root {
+      --primary: #28a745;
+      --secondary: #f4f4f4;
+      --text-color: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--secondary);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1.5em 1em;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2em;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 2em 1em;
+    }
+
+    section {
+      margin-bottom: 2em;
+      background: white;
+      border-radius: 12px;
+      padding: 1.5em;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 0.5em;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
+    }
+
+    .grid > div {
+      flex: 1 1 300px;
+    }
+
+    .highlight {
+      background: var(--primary);
+      color: white;
+      padding: 1em;
+      border-radius: 8px;
+      margin-top: 1em;
+    }
+
+    .values-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .values-list li {
+      margin-bottom: 0.5em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1em;
+      background-color: #eee;
+      margin-top: 2em;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h4>About MatundaAfyaKenya</h4>
+    <p>Fresh Fruits Delivered with Care Across Kenya</p>
+  </header>
+
+  <main>
+    <section>
+      <h4>Who We Are</h4>
+      <p>MatundaAfyaKenya is a Kenyan-based fruit delivery company that connects customers to the freshest, healthiest fruits grown by trusted local farmers. We believe in quality, convenience, and nutrition—delivered right to your doorstep.</p>
+    </section>
+
+    <section class="grid">
+      <div>
+        <h4>Our Mission</h4>
+        <p>To promote healthy living by making fresh fruits accessible to every household in Kenya, while supporting local agriculture and sustainable farming practices.</p>
+      </div>
+      <div>
+        <h4>Our Vision</h4>
+        <p>To become Kenya’s most reliable and loved fruit delivery brand, known for quality produce, fair prices, and excellent customer service.</p>
+      </div>
+    </section>
+
+    <section>
+      <h4>Our Values</h4>
+      <ul class="values-list">
+        <li>✅ Freshness First – We only deliver premium quality, farm-fresh fruits.</li>
+        <li>✅ Customer Commitment – Your satisfaction is our priority.</li>
+        <li>✅ Local Support – We empower local farmers and communities.</li>
+        <li>✅ Eco-Friendly – Our packaging is reusable and biodegradable.</li>
+        <li>✅ Reliability – Orders delivered on time, every time.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h4>Meet the Team</h4>
+      <p>Behind MatundaAfyaKenya is a passionate team of nutritionists, logistics experts, and friendly customer service representatives all working together to make your fruit experience seamless and enjoyable.</p>
+      <div class="highlight">
+        <strong>Need help or have questions?</strong><br />
+        Email us at <a href="mailto:support@matundaafyakenya.co.ke" style="color: white; text-decoration: underline;">support@matundaafyakenya.co.ke</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <%= new Date().getFullYear() %> MatundaAfyaKenya. All rights reserved.
+  </footer>
+</body>
+</html>
